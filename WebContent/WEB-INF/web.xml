@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>ServletsFromScratch</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <context-param>
+    <param-name>project</param-name>
+    <param-value>servlets</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>ServletInterfaceImpl_1</servlet-name>
+    <servlet-class>org.mnr.servlets.ServletInterfaceImpl_1</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletInterfaceImpl_1</servlet-name>
+    <url-pattern>/ServletInterfaceImpl_1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GenericServletImpl_2</servlet-name>
+    <servlet-class>org.mnr.servlets.GenericServletImpl_2</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GenericServletImpl_2</servlet-name>
+    <url-pattern>/GenericServletImpl_2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>HttpServletImpl_3</servlet-name>
+    <servlet-class>org.mnr.servlets.HttpServletImpl_3</servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServletImpl_3</servlet-name>
+    <url-pattern>/HttpServletImpl_3</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <exception-type>java.lang.NullPointerException</exception-type>
+    <location>/Error1.jsp</location>
+  </error-page>
+  <security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>Authentication111</web-resource-name>
+  		<url-pattern>/secureServlet</url-pattern> <!-- here multiple urls can be added for restriction  -->
+  		<http-method>GET</http-method><!-- only these methods are allowed for above url   -->
+  		<http-method>POST</http-method>
+  	</web-resource-collection>
+  	<auth-constraint>
+  	<role-name>naveen</role-name><!-- when above url is accessed, this role will be invoked
+  									  and username and password of this role will be prompted
+  									  if authenticated successfully, then response is serveed   -->
+  	</auth-constraint>
+  </security-constraint>
+  <security-role>
+  	   <role-name>naveen</role-name><!-- these roles are created on server -->
+    </security-role>
+  <login-config>
+   <auth-method>BASIC</auth-method>  <!-- This entry must be before realm  -->
+  <realm-name>myrealm</realm-name>  
+  
+   <!-- <auth-method>FORM</auth-method>
+      <form-login-config>  This form based authentication is not working TBD
+        <form-login-page>/secureServlet</form-login-page>
+        <form-error-page>/AuthError.jsp</form-error-page>
+      </form-login-config>  --> 
+  </login-config>
+</web-app>
